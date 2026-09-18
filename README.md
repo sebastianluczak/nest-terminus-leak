@@ -20,6 +20,39 @@ If you plug in grafana and prom-client, you'll see the issue more clearly, simil
 
 Result is predictable - heap exhaustion, app becomes unstable after some time.
 
+To observe in real time, start Prometheus:
+
+```
+docker run \
+ --name prometheus \
+  -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+  --rm \
+  --network=host \
+  prom/prometheus
+```
+
+Then, start Grafana.
+
+```
+  docker run \
+   --name grafana \
+   -p 3001:3000 \ 
+   --rm \
+   --network=host \
+   grafana/grafana
+```
+
+Go to http://localhost:3000/login
+
+admin/admin
+
+Add proper sources everywhere. Add dashboard 11956 to grafana via import.
+
+Fire `bash health_check.sh`. Observe.
+
+---
+
 The issue is suspected to be in:
 
 ```
@@ -28,3 +61,5 @@ The issue is suspected to be in:
         return new HttpService();
     }
 ```
+
+But I don't know yet.

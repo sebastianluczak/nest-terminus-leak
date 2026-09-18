@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROUTE="http://localhost:3000/health"
+ROUTE="http://localhost:8080/health"
 
 while true; do
   curl -sS $ROUTE | jq -r '.status' | grep -q "ok"
