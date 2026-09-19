@@ -1,4 +1,4 @@
-= NestJS 12.x with Terminus 12.x leaks memory
+# NestJS 12.x with Terminus 12.x leaks(?) memory
 
 This is the smallest reproducible repository showing the issue.
 
@@ -35,21 +35,21 @@ docker run \
 Then, start Grafana.
 
 ```
-  docker run \
-   --name grafana \
-   -p 3001:3000 \ 
-   --rm \
-   --network=host \
-   grafana/grafana
+docker run \
+  --name grafana \
+  -p 3001:3000 --rm --network=host \
+  grafana/grafana
 ```
 
 Go to http://localhost:3000/login
 
-admin/admin
+Credentials are: admin/admin
 
-Add proper sources everywhere. Add dashboard 11956 to grafana via import.
+Add proper source for your Prometheus - it's localhost:9090.
 
-Fire `bash health_check.sh`. Observe.
+Add dashboard 11956 to grafana via import.
+
+Fire `bash health_check.sh`. Observe heap in Grafana for at least 30 minutes, you should notice the pattern.
 
 ---
 
