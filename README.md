@@ -51,6 +51,10 @@ Add dashboard 11956 to grafana via import.
 
 Fire `bash health_check.sh`. Observe heap in Grafana for at least 30 minutes, you should notice the pattern.
 
+![image](image.png)
+
+Leave app long enough, it'll crash.
+
 ---
 
 The issue is suspected to be in:
